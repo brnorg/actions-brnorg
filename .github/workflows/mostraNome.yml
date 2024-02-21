@@ -1,0 +1,17 @@
+on:
+  workflow_call:
+
+jobs:
+  alteraTexto:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: lendo repositorio
+        uses: actions/checkout@v4
+      - name: imprimindo variavel
+        run: echo ${{ vars.NODEPOOL }}
+      - name: fazendo o seed
+        run: |
+            sed -i "s/!!!NODEPOOL!!!/${{ vars.NODEPOOL }}/g" deployment.yaml
+      - name: mostra o arquivo alterado
+        run: cat deployment.yaml
