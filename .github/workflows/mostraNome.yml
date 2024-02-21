@@ -1,3 +1,4 @@
+name: trocando nome de arquivo
 on:
   workflow_call:
 
