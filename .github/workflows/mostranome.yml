@@ -11,8 +11,13 @@ jobs:
         uses: actions/checkout@v4
       - name: imprimindo variavel
         run: echo ${{ vars.NODEPOOL }}
-      - name: fazendo o seed
+      - name: Set default value if variable is empty
         run: |
-            sed -i "s/!!!NODEPOOL!!!/${{ vars.NODEPOOL }}/g" deployment.yaml
+          if [ -z "${{ env.NODEPOOL }}" ]; then
+            sed -i 's/!!!NODEPOOL!!!/default: ""/g' deployment.txt
+          else
+            sed -i "s/!!!NODEPOOL!!!/${{ env.NODEPOOL }}/g" seu_arquivo.txt
+          fi
+        shell: bash
       - name: mostra o arquivo alterado
         run: cat deployment.yaml
