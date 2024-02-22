@@ -16,7 +16,7 @@ jobs:
           if [ -z "${{ env.NODEPOOL }}" ]; then
             sed -i 's/!!!NODEPOOL!!!/default: ""/g' deployment.txt
           else
-            sed -i "s/!!!NODEPOOL!!!/${{ env.NODEPOOL }}/g" seu_arquivo.txt
+            sed -i "s/!!!NODEPOOL!!!/${{ env.NODEPOOL }}/g" deployment.yaml
           fi
         shell: bash
       - name: mostra o arquivo alterado
