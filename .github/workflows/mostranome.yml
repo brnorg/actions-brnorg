@@ -13,7 +13,7 @@ jobs:
         run: echo ${{ vars.NODEPOOL }}
       - name: Set default value if variable is empty
         run: |
-          if [ z "${{ env.NODEPOOL }}" ]; then
+          if [ -z "${{ env.NODEPOOL }}" ]; then
             sed -i "s/#nodeSelector/nodeSelector/g" deployment.yaml
             sed -i "s/#nodepoolname/${{ env.NODEPOOL }}/g" deployment.yaml
           fi
