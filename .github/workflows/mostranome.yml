@@ -13,10 +13,9 @@ jobs:
         run: echo ${{ vars.NODEPOOL }}
       - name: Set default value if variable is empty
         run: |
-          if [ -z "${{ env.NODEPOOL }}" ]; then
-            sed -i 's/!!!NODEPOOL!!!/default: ""/g' deployment.yaml
-          else
-            sed -i "s/!!!NODEPOOL!!!/${{ env.NODEPOOL }}/g" deployment.yaml
+          if [ -n "${{ env.NODEPOOL }}" ]; then
+            sed -i "s/#nodeSelector/nodeSelector/g" seu_arquivo.yaml
+            sed -i "s/#nodepoolname/${{ env.NODEPOOL }}/g" seu_arquivo.yaml
           fi
         shell: bash
       - name: mostra o arquivo alterado
