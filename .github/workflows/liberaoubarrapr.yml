@@ -1,0 +1,14 @@
+name: libera ou barra a PR
+on:
+  workflow_call:
+
+
+jobs:
+  status-da-PR:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: quebrando a PR
+        run: exit 1
+  
+
