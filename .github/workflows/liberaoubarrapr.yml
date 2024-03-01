@@ -9,6 +9,6 @@ jobs:
 
     steps:
       - name: quebrando a PR
-        run: exit 1
+        run: exit 0
   
 
