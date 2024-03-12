@@ -29,13 +29,13 @@ jobs:
       - name: Configurar cache do rfbrowser
         uses: actions/cache@v2
         with:
-          path: /rfbrowser/cache
+          path: ~/.rfbrowser
           key: rfbrowser-${{ runner.os }}
           restore-keys: |
             rfbrowser-${{ runner.os }}
 
       - name: rfbrowser cache
-        run: rfbrowser init --cache-dir /rfbrowser/cache
+        run: rfbrowser init
 
       - name: executando testes robot
         run: |
