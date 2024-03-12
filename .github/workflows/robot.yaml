@@ -52,6 +52,19 @@ jobs:
       - name: executando testes robot
         run: |
           robot -d ./resultados -v HEADLESS:true \
-          -v BROWSER:chromium tests 
+          -v BROWSER:chromium tests
+
+      - name: disponibilizando status dos testes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados testes no navegador
+          path: ./resultados
+          if-no-files-found: ignore
+          retention-days: 1
+          overwrite: true
+          
+          
+          
           
           
