@@ -1,0 +1,14 @@
+name: teste frontend com robot framework
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  testes-com-robot:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: faz o checkcout
+        uses: actions/checkout@v4
+    
