@@ -45,7 +45,7 @@ jobs:
 
       - name: verifica instala dependencias rfbrowser se necessario
         run: |
-          if [ "$(steps.cache-rfbrowser-check.outputs.cache-found)" != 'true' ]; then
+          if [ "${{ steps.cache-rfbrowser-check.outputs.cache-found }}" != 'true' ]; then
             rfbrowser init
           fi
 
