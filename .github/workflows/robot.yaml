@@ -38,9 +38,9 @@ jobs:
         id: cache-rfbrowser-check
         run: |
           if [ -d /opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/Browser/wrapper ]; then
-            echo "name=cache-found=true" >> "$GITHUB_OUTPUT"
+            echo "cache-found=true" >> "$GITHUB_OUTPUT"
           else
-            echo "name=cache-found=false" >> "$GITHUB_OUTPUT"
+            echo "cache-found=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: verifica instala dependencias rfbrowser se necessario
