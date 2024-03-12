@@ -12,7 +12,6 @@ jobs:
       - name: faz o checkcout
         uses: actions/checkout@v4
 
-
       - name: Inicializa ambiente nodejs
         uses: actions/setup-node@v4
         with:
@@ -20,14 +19,23 @@ jobs:
           cache: 'npm'
       - run: npm ci
 
-
       - name: Inicializa ambiente python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10' 
           cache: 'pip'
       - run: pip install -r requirements.txt
-      #- run: rfbrowser init
+
+      - name: Configurar cache do rfbrowser
+        uses: actions/cache@v2
+        with:
+          path: /rfbrowser/cache
+          key: rfbrowser-${{ runner.os }}
+          restore-keys: |
+            rfbrowser-${{ runner.os }}
+
+      - name: rfbrowser cache
+        run: rfbrowser init --cache-dir /rfbrowser/cache
 
       - name: executando testes robot
         run: |
