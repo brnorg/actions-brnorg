@@ -29,7 +29,7 @@ jobs:
       - name: Configurar cache do rfbrowser
         uses: actions/cache@v2
         with:
-          path: ~/.rfbrowser
+          path: /opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/Browser/wrapper
           key: rfbrowser-${{ runner.os }}
           restore-keys: |
             rfbrowser-${{ runner.os }}
