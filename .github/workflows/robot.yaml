@@ -25,3 +25,10 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+
+      - name: executando testes robot
+        run: |
+          robot -d ./resultados -v HEADLESS:true \
+          -v BROWSER:chromium tests 
+          
+          
