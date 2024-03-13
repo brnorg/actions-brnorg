@@ -7,6 +7,11 @@ on:
 jobs:
   testes-com-robot:
     runs-on: [ubuntu-latest]
+    permissions: write-all
+    strategy:
+      matrix: 
+        browser: [chromium, firefox, webkit]
+      fail-fast: false
 
     steps:
       - name: faz o checkcout
@@ -59,15 +64,15 @@ jobs:
 
       - name: executando testes robot
         run: |
-          robot -d ./reports -v HEADLESS:true \
-          -v BROWSER:chromium tests
+          robot -d ./reports-${{ matrix.browser }} -v HEADLESS:true \
+          -v BROWSER:${{ matrix.browser }} tests
 
       - name: disponibilizando status dos testes
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: reports testes no navegador
-          path: ./reports
+          name: reports testes no navegador ${{ matrix.browser }}
+          path: ./reports-${{ matrix.browser }}
           if-no-files-found: ignore
           retention-days: 1
           overwrite: true
