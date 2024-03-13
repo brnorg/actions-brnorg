@@ -60,18 +60,23 @@ jobs:
 
       - name: executando testes robot
         run: |
-          robot -d ./resultados -v HEADLESS:true \
+          robot -d ./reports -v HEADLESS:true \
           -v BROWSER:chromium tests
 
       - name: disponibilizando status dos testes
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: resultados testes no navegador
-          path: ./resultados
+          name: reports testes no navegador
+          path: ./reports
           if-no-files-found: ignore
           retention-days: 1
           overwrite: true
+
+      - name: reports no summary
+        uses: joonvena/robotframework-reporter-action@v2
+         with:
+           gh_access_token: ${{ secrets.GITHUB_TOKEN }}
           
           
           
