@@ -38,14 +38,13 @@ jobs:
       - name: Verificar cache do rfbrowser
         id: cache-rfbrowser-check
         run: |
-          # Obter o tamanho do diretório em bytes
-          size=$(du -s /opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/Browser/wrapper | awk '{print $1}')
+          directory="/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/Browser/wrapper"
           
-          # Definir o tamanho em bytes para 1GB
-          size_threshold=1073741824
+          # Obter o tamanho do diretório em kilobytes
+          size=$(du -sk "$directory" | cut -f1)
           
-          # Verificar se o tamanho do diretório é maior que 1GB
-          if [ "$size" -gt "$size_threshold" ]; then
+          # Verificar se o tamanho é maior que 1024 KB (1 MB)
+          if [ "$size" -gt 1024 ]; then
             echo "cache-found=true" >> "$GITHUB_OUTPUT"
           else
             echo "cache-found=false" >> "$GITHUB_OUTPUT"
