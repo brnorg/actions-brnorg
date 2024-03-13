@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
+      - run: npm install playwright --save-dev
       - run: npm ci
 
       - name: Inicializa ambiente python
