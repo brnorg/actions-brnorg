@@ -75,10 +75,6 @@ jobs:
 
       - name: reports no summary
         uses: joonvena/robotframework-reporter-action@v2
-         with:
-           gh_access_token: ${{ secrets.GITHUB_TOKEN }}
-          
-          
-          
-          
-          
+        with:
+          gh_access_token: ${{ secrets.GITHUB_TOKEN }}
+        
