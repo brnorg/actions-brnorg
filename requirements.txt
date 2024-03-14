@@ -1,3 +1,4 @@
 robotframework==7.0
 robotframework-browser==18.2.0
 robotframework-faker==5.0.0
+robotframework-metrics==3.3.3
