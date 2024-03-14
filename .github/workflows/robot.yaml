@@ -65,7 +65,7 @@ jobs:
       - name: executando testes robot
         run: |
           robot -d ./reports-${{ matrix.browser }} -v HEADLESS:true \
-          -v BROWSER:${{ matrix.browser }} tests >> $GITHUB_STEP_SUMMARY
+          -v BROWSER:${{ matrix.browser }} tests | robotmetrics
 
       - name: disponibilizando status dos testes
         if: always()
