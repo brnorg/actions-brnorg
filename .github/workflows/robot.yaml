@@ -65,7 +65,10 @@ jobs:
       - name: executando testes robot
         run: |
           robot -d ./reports-${{ matrix.browser }} -v HEADLESS:true \
-          -v BROWSER:${{ matrix.browser }} tests | robotmetrics
+          -v BROWSER:${{ matrix.browser }} tests
+          
+          cd ./reports-${{ matrix.browser }}
+          robotmetrics
 
       - name: disponibilizando status dos testes
         if: always()
