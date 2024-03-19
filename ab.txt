@@ -1,0 +1,37 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v2
+
+      - name: Ler arquivo .txt
+        id: read_file
+        run: |
+          address=$(grep -oP 'servidor=\K[^ ]+' arquivo.txt)
+          echo "::set-output name=address::$address"
+
+      - name: Configurar e iniciar servidor web
+        run: |
+          # Use a variável $address aqui para configurar o servidor web
+          # Iniciar o servidor em segundo plano
+          npm install
+          npm start --port $address &
+
+      - name: Esperar o servidor estar pronto
+        run: |
+          for i in {1..10}; do
+            if curl -sSf "http://$address" >/dev/null; then
+              echo "Servidor está pronto!"
+              break
+            fi
+            echo "Aguardando o servidor estar pronto..."
+            sleep 10
+          done
+
+      - name: Testar servidor web com Robot Framework
+        run: |
+          # Coloque aqui o comando para executar os testes do Robot Framework
+          # Exemplo:
+          # robot tests/
