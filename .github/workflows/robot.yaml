@@ -70,6 +70,61 @@ jobs:
           cd ./reports-${{ matrix.browser }}
           robotmetrics
 
+          
+      - name: preparando arquivo de summary
+        run: |
+          nome_arquivo="git_summary.py"
+
+          # Cria o código Python a ser escrito no arquivo
+          cat << EOF > "$nome_arquivo"
+          from robot.api import ExecutionResult, ResultVisitor
+          import sys
+          
+          class MyResultVisitor(ResultVisitor):
+              def __init__(self, markdown_file='report.md'):
+                  self.failed_tests = []
+                  self.passed_tests = []
+                  self.markdown_file = markdown_file
+          
+              def visit_test(self, test):
+                  if test.status == 'FAIL':
+                      self.failed_tests.append(test.name)
+                  elif test.status == 'PASS':
+                      self.passed_tests.append(test.name)
+          
+              def end_result(self, result):
+                  # Create a new markdown file
+                  with open(self.markdown_file, "w") as f:
+                      f.write("# Robot Framework Report\n")
+                      f.write("|Test|Status|\n")
+                      f.write("|---|---|\n")
+                      for test in self.passed_tests:
+                          f.write(f"|{test}|PASS|\n")
+                      for test in self.failed_tests:
+                          f.write(f"|{test}|FAIL|\n")
+                          
+          if __name__ == '__main__':
+              try:
+                  output_file = sys.argv[1]
+              except IndexError:
+                  output_file = "output.xml"
+              try:
+                  markdown_file = sys.argv[2]
+              except IndexError:
+                  markdown_file = "report.md"
+              result = ExecutionResult(output_file)
+              result.visit(MyResultVisitor())
+          EOF
+          
+          # Exibe uma mensagem indicando que o arquivo foi criado
+          echo "O arquivo '$nome_arquivo' foi criado com sucesso!"
+
+      - name: gerando arquivo de summary
+        run: python git_summary.py
+
+      - name: disponibilizando arquivo no summary
+        run: cat report.md >> >> $GITHUB_STEP_SUMMARY
+      
       - name: disponibilizando status dos testes
         if: always()
         uses: actions/upload-artifact@v4
@@ -79,5 +134,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 1
           overwrite: true
+
+        
 
         
