@@ -1,0 +1,23 @@
+name: localhost
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  localhost:
+    runs-on: [ubuntu-latest]
+
+    steps:
+
+      - name: fazendo checkout
+        uses: actions/checkout@v4.1.2
+
+      - name: configurando python
+        uses: actions/setup-python@v5.0.0
+        
+      - name: subindo servidor
+        run: python -m http.server 4200 &
+
+      - name: verificando status
+        run: curl http://localhost:4200
