@@ -119,6 +119,8 @@ jobs:
           # Exibe uma mensagem indicando que o arquivo foi criado
           echo "O arquivo '$nome_arquivo' foi criado com sucesso!"
 
+      - run: ls
+
       - name: gerando arquivo de summary
         run: python git_summary.py
 
