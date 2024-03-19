@@ -122,17 +122,11 @@ jobs:
 
       - run: ls
 
-      - name: gerando arquivo de summary
+      - name: gerando arquivo de summary e metricas de dashboard
         run: |
           cd ./reports-${{ matrix.browser }}
           python git_summary.py
-
-      - name: disponibilizando arquivo no summary
-        run: cat report.md >> $GITHUB_STEP_SUMMARY
-
-      - name: criando dash com robotmetrics
-        run: |
-          cd ./reports-${{ matrix.browser }}
+          cat report.md >> $GITHUB_STEP_SUMMARY
           robotmetrics
       
       - name: disponibilizando status dos testes
