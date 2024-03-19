@@ -68,11 +68,12 @@ jobs:
           robot -d ./reports-${{ matrix.browser }} -v HEADLESS:true \
           -v BROWSER:${{ matrix.browser }} tests
           
-          cd ./reports-${{ matrix.browser }}
-
           
       - name: preparando arquivo de summary
         run: |
+
+          cd ./reports-${{ matrix.browser }}
+        
           nome_arquivo="git_summary.py"
 
           # Cria o código Python a ser escrito no arquivo
@@ -122,13 +123,17 @@ jobs:
       - run: ls
 
       - name: gerando arquivo de summary
-        run: python git_summary.py
+        run: |
+          cd ./reports-${{ matrix.browser }}
+          python git_summary.py
 
       - name: disponibilizando arquivo no summary
         run: cat report.md >> >> $GITHUB_STEP_SUMMARY
 
       - name: criando dash com robotmetrics
-        run: robotmetrics
+        run: |
+          cd ./reports-${{ matrix.browser }}
+          robotmetrics
       
       - name: disponibilizando status dos testes
         if: always()
