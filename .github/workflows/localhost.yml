@@ -18,6 +18,14 @@ jobs:
         
       - name: subindo servidor
         run: python -m http.server 4200 &
-
-      - name: verificando status
-        run: curl http://localhost:4200
+        
+      - name: Esperar o servidor estar pronto
+        run: |
+          for i in {1..10}; do
+            if curl -sSf "http://localhost:4200" >/dev/null; then
+              echo "Servidor está pronto!"
+              break
+            fi
+            echo "Aguardando o servidor estar pronto..."
+            sleep 10
+          done
