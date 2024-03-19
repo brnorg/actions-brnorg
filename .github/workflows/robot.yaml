@@ -30,7 +30,7 @@ jobs:
         with:
           python-version: '3.10' 
           cache: 'pip'
-      - run: pip install robotmetrics
+      - run: pip install robotframework-metrics==3.3.3
       - run: pip install -r requirements.txt
 
       - name: Configurar cache do rfbrowser
