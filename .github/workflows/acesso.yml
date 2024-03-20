@@ -10,8 +10,6 @@ on:
 jobs:
   acesso:
     runs-on: [self-hosted, Linux]
-    # container:
-    #   image: ubuntu
     concurrency: 
       group: grupo-testes
       cancel-in-progress: true
