@@ -10,6 +10,8 @@ on:
 jobs:
   acesso:
     runs-on: [self-hosted, Linux]
+    container:
+      image: ubuntu
     concurrency: 
       group: grupo-testes
       cancel-in-progress: true
@@ -28,7 +30,15 @@ jobs:
           REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
           docker run -d --name $REPO_NAME-$GITHUB_RUN_NUMBER nginx
           
+      - name: verificando conteudo
+        run: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
 
+      - name: parando container
+        run: docker stop $REPO_NAME-$GITHUB_RUN_NUMBER
+
+      - name: limpando container
+        run: docker rm -f $REPO_NAME-$GITHUB_RUN_NUMBER
+      
       # - name: configurando python
       #   uses: actions/setup-python@v5.0.0
       #   with:
