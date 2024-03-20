@@ -14,25 +14,30 @@ jobs:
       group: grupo-testes
       cancel-in-progress: true
     steps:
-
+    
       - name: fazendo checkout
         uses: actions/checkout@v4.1.2
 
-      - name: configurando python
-        uses: actions/setup-python@v5.0.0
+      - name: usando ngnix
+        uses: docker://nginx
         with:
-          python-version: '3.10' 
+          ports: 8080:80
+
+      # - name: configurando python
+      #   uses: actions/setup-python@v5.0.0
+      #   with:
+      #     python-version: '3.10' 
         
-      - name: subindo servidor
-        run: python -m http.server 4200 &
+      # - name: subindo servidor
+      #   run: python -m http.server 4200 &
         
-      - name: Esperar o servidor estar pronto
-        run: |
-          for i in {1..10}; do
-            if curl -sSf "http://localhost:4200" >/dev/null; then
-              echo "Servidor está pronto!"
-              break
-            fi
-            echo "Aguardando o servidor estar pronto..."
-            sleep 10
-          done
+      # - name: Esperar o servidor estar pronto
+      #   run: |
+      #     for i in {1..10}; do
+      #       if curl -sSf "http://localhost:4200" >/dev/null; then
+      #         echo "Servidor está pronto!"
+      #         break
+      #       fi
+      #       echo "Aguardando o servidor estar pronto..."
+      #       sleep 10
+      #     done
