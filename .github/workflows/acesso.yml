@@ -18,10 +18,14 @@ jobs:
       - name: fazendo checkout
         uses: actions/checkout@v4.1.2
 
-      - name: usando apache
-        uses: docker://httpd
-        with:
-          container-name: meu
+      # - name: usando apache
+      #   uses: docker://httpd
+      #   with:
+      #     container-name: meu
+
+      - name: fazendo novo container
+        run: |
+          docker container run --name meu-container-personalizado hello-world
 
       # - name: configurando python
       #   uses: actions/setup-python@v5.0.0
