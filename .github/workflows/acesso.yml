@@ -38,7 +38,7 @@ jobs:
           
       - name: verificando conteudo
         run: |
-          curl http://brnnn
+          ping brnnn
 
       - name: container de verificacao
         uses: docker://ubuntu
