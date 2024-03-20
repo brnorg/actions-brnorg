@@ -18,10 +18,11 @@ jobs:
       - name: fazendo checkout
         uses: actions/checkout@v4.1.2
 
-      - name: usando ngnix
+      - name: usando apache
         uses: docker://httpd
-        # with:
-        #   ports: 8080:80
+        with:
+          name: meu
+          ports: 8080:80
 
       # - name: configurando python
       #   uses: actions/setup-python@v5.0.0
