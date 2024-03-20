@@ -39,7 +39,7 @@ jobs:
         
 
       - name: parando container
-        run: docker container stop $REPO_NAME-$GITHUB_RUN_NUMBER
+        run: docker stop $REPO_NAME-$GITHUB_RUN_NUMBER
 
       - name: limpando container
         run: docker container rm -f $REPO_NAME-$GITHUB_RUN_NUMBER
