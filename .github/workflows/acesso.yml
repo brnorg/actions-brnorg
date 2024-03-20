@@ -26,7 +26,6 @@ jobs:
 
       - name: fazendo novo container
         run: |
-          apt-install echo -y
           REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
           docker run -d --name $REPO_NAME-$GITHUB_RUN_NUMBER nginx
           
@@ -40,6 +39,7 @@ jobs:
         with:
           entrypoint: bash
           args: |
+            apt-install echo -y
             REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
             curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
         
