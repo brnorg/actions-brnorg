@@ -10,8 +10,8 @@ on:
 jobs:
   acesso:
     runs-on: [self-hosted, Linux]
-    container:
-      image: ubuntu
+    # container:
+    #   image: ubuntu
     concurrency: 
       group: grupo-testes
       cancel-in-progress: true
@@ -30,8 +30,14 @@ jobs:
           REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
           docker run -d --name $REPO_NAME-$GITHUB_RUN_NUMBER nginx
           
-      - name: verificando conteudo
-        run: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
+      # - name: verificando conteudo
+      #   run: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
+
+      - name: container de verificacao
+        uses: docker://ubuntu
+        with:
+          args: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
+        
 
       - name: parando container
         run: docker stop $REPO_NAME-$GITHUB_RUN_NUMBER
