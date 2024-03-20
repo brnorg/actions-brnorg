@@ -29,8 +29,10 @@ jobs:
           REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
           docker run -d --name $REPO_NAME-$GITHUB_RUN_NUMBER nginx
           
-      # - name: verificando conteudo
-      #   run: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
+      - name: verificando conteudo
+        run: |
+          REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
+          curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
 
       # - name: container de verificacao
       #   uses: docker://ubuntu
@@ -39,10 +41,14 @@ jobs:
         
 
       - name: parando container
-        run: docker stop $REPO_NAME-$GITHUB_RUN_NUMBER
+        run: |
+          REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
+          docker stop $REPO_NAME-$GITHUB_RUN_NUMBER
 
       - name: limpando container
-        run: docker container rm -f $REPO_NAME-$GITHUB_RUN_NUMBER
+        run: |
+          REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
+          docker container rm -f $REPO_NAME-$GITHUB_RUN_NUMBER
       
       # - name: configurando python
       #   uses: actions/setup-python@v5.0.0
