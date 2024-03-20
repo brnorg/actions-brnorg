@@ -10,7 +10,9 @@ on:
 jobs:
   localhost:
     runs-on: [self-hosted, Linux]
-
+    concurrency: 
+      group: grupo-testes
+      cancel-in-progress: true
     steps:
 
       - name: fazendo checkout
