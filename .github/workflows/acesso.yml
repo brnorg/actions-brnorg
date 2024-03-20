@@ -24,15 +24,21 @@ jobs:
       #   with:
       #     container-name: meu
 
+      # - name: fazendo novo container
+      #   run: |
+      #     REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
+      #     docker run -d --name $REPO_NAME-$GITHUB_RUN_NUMBER nginx
+
+
       - name: fazendo novo container
         run: |
           REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
-          docker run -d --name $REPO_NAME-$GITHUB_RUN_NUMBER nginx
+          docker run -d --name brnnn nginx
+
           
-      # - name: verificando conteudo
-      #   run: |
-      #     REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
-      #     curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
+      - name: verificando conteudo
+        run: |
+          curl brnnn
 
       - name: container de verificacao
         uses: docker://ubuntu
