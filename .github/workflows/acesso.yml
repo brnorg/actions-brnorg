@@ -31,10 +31,10 @@ jobs:
       # - name: verificando conteudo
       #   run: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
 
-      - name: container de verificacao
-        uses: docker://ubuntu
-        with:
-          args: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
+      # - name: container de verificacao
+      #   uses: docker://ubuntu
+      #   with:
+      #     args: curl http://$REPO_NAME-$GITHUB_RUN_NUMBER
         
 
       - name: parando container
