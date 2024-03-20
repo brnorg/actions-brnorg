@@ -1,4 +1,4 @@
-name: localhost
+name: acesso
 
 on:
   push:
@@ -20,6 +20,8 @@ jobs:
 
       - name: configurando python
         uses: actions/setup-python@v5.0.0
+        with:
+          python-version: '3.10' 
         
       - name: subindo servidor
         run: python -m http.server 4200 &
