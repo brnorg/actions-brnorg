@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  localhost:
+  acesso:
     runs-on: [self-hosted, Linux]
     concurrency: 
       group: grupo-testes
