@@ -21,8 +21,8 @@ jobs:
       - name: configurando python
         uses: actions/setup-python@v5.0.0
         
-    #  - name: subindo servidor
-    #    run: python -m http.server 4200 &
+      - name: subindo servidor
+        run: python -m http.server 4200 &
         
       - name: Esperar o servidor estar pronto
         run: |
