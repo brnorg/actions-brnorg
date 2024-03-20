@@ -25,7 +25,8 @@ jobs:
 
       - name: fazendo novo container
         run: |
-          docker container run --name $GITHUB_REPOSITORY-${{ github.event_name }} nginx
+          REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
+          docker container run --name $REPO_NAME-${{ github.event_name }} nginx
 
       # - name: configurando python
       #   uses: actions/setup-python@v5.0.0
