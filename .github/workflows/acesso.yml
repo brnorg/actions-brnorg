@@ -21,8 +21,7 @@ jobs:
       - name: usando apache
         uses: docker://httpd
         with:
-          name: meu
-          ports: 8080:80
+          names: meu
 
       # - name: configurando python
       #   uses: actions/setup-python@v5.0.0
