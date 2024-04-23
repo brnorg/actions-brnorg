@@ -21,7 +21,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-     - run: ${{ toJSON("ola") }}
+     - run: ${{ toJSON("ola: mundo") }}
   # job1:
   #   runs-on: ubuntu-latest
   #   outputs:
