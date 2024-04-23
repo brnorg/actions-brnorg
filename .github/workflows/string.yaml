@@ -33,7 +33,7 @@ jobs:
   job2:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJSON('{"valores":["valor1", "valor2"]}') }}
+      matrix: ${{ fromJSON('{"valores":["valor1","valor2"]}') }}
     steps:
       - run: echo "ola"
 
