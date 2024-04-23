@@ -37,12 +37,12 @@ jobs:
   #   steps:
   #     - run: echo "ola"
 
-  # job2:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix: ${{ fromJSON('{"valores":["valor1","valor2"]}') }}
-  #   steps:
-  #     - run: echo ${{ fromJSON('{"valores":[inputs.name]}') }}
+  job2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON('{"valores":["valor1","valor2"]}') }}
+    steps:
+      - run: echo '{"valores":[inputs.name]}'
 
 
   # job1:
