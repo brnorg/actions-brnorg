@@ -14,47 +14,37 @@ on:
           - "[dr, prod]"
   
 jobs:
-  job1:
+  change-string:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
     steps:
-      - id: set-matrix
-        run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
+     - name: teste
+       run: |
+        ambiente="a1,a2"
+        
+        # Transforma a string em um array, separando os valores pela vírgula
+        IFS=',' read -r -a valores <<< "$ambiente"
+        
+        # Inicia a construção do JSON
+        json="{"
+        
+        # Loop pelos valores no array
+        for valor in "${valores[@]}"; do
+            # Adiciona cada par chave-valor ao JSON
+            json="$json\n  \"$valor\": \"$valor\","
+        done
+        
+        # Remove a última vírgula e fecha o JSON
+        json="${json%,*}\n}"
+        
+        # Imprime o JSON
+        echo matrix=$json >> $GITHUB_OUTPUT
+
+
   job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
-    steps:
-      - run: echo "Matrix - Project ${{ matrix.project }}, Config ${{ matrix.config }}"
-
-  # change-string:
-  #   runs-on: ubuntu
-
-  #   steps:
-  #    - name: teste
-  #      run: |
-  #       ambiente="a1,a2"
-        
-  #       # Transforma a string em um array, separando os valores pela vírgula
-  #       IFS=',' read -r -a valores <<< "$ambiente"
-        
-  #       # Inicia a construção do JSON
-  #       json="{"
-        
-  #       # Loop pelos valores no array
-  #       for valor in "${valores[@]}"; do
-  #           # Adiciona cada par chave-valor ao JSON
-  #           json="$json\n  \"$valor\": \"$valor\","
-  #       done
-        
-  #       # Remove a última vírgula e fecha o JSON
-  #       json="${json%,*}\n}"
-        
-  #       # Imprime o JSON
-  #       echo -e $json
-
-
-                 
-  
+   needs: change-string
+   runs-on: ubuntu-latest
+   strategy:
+      matrix: ${{ fromJSON(needs.change-string.outputs.matrix) }}
+   steps:
+     - run: echo "Matrix - Project ${{ matrix.project }}, Config ${{ matrix.config }}"              
