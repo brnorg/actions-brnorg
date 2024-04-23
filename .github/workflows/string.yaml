@@ -21,7 +21,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-     - run: echo ${{ fromJSON({\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}) }}
+     - run: ${{ toJSON("ola") }}
   # job1:
   #   runs-on: ubuntu-latest
   #   outputs:
