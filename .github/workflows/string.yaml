@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - run: echo ${{ toJSON('bruno:brn,teste:123') }}
-     - run: echo ${{ fromJSON('bruno':'brn','teste':'123') }}
+     - run: echo ${{ fromJSON(bruno:"brn",teste:"123") }}
   # job1:
   #   runs-on: ubuntu-latest
   #   outputs:
