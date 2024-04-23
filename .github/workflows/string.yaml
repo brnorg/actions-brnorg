@@ -42,7 +42,7 @@ jobs:
     strategy:
       matrix: ${{ fromJSON('{"valores":["valor1","valor2"]}') }}
     steps:
-      - run: echo '{"valores":[inputs.name]}'
+      - run: echo ${{ fromJSON('{"valores":[inputs.name]}') }}
 
 
   # job1:
