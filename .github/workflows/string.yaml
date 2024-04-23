@@ -21,7 +21,7 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-        $ambiente="s1,s2"
+        ambiente="s1,s2"
                 
         # Lendo a variável de ambiente
         variavel=$ambiente
