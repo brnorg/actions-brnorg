@@ -27,7 +27,7 @@ jobs:
       - id: set-matrix
         run:
           ambiente="s1,s2,s3"
-          smatrix=$(IFS=','; echo "{\"include\":["; for item in $ambiente; do echo "{\"value\":\"$item\"},"; done | sed 's/,$/]}/')
+          smatrix=$(IFS=','; echo -n "{\"include\":[{\"value\":\"$ambiente\"}]}")
           echo matrix=$smatrix >> $GITHUB_OUTPUT
         # run: echo "matrix={\"include\":[{\"value\":\"prd\"},{\"value\":\"dr\"}]}" >> $GITHUB_OUTPUT
   job2:
