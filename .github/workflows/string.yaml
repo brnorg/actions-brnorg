@@ -21,30 +21,30 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-        ambiente="s1,s2"
-                
-        # Lendo a variável de ambiente
-        variavel=$ambiente
-        
-        # Separando os valores da variável por vírgula
-        IFS=',' read -ra valores <<< "$variavel"
-        
-        # Inicializando o JSON
-        json="{\"include\": ["
-        
-        # Loop sobre os valores
-        for valor in "${valores[@]}"; do
-            # Adicionando cada valor ao JSON
-            json="$json\n  {\"value\": \"$valor\"},"
-        done
-        
-        # Removendo a última vírgula
-        json=$(echo "$json" | sed '$ s/,$//')
-        
-        # Finalizando o JSON
-        json="$json\n]}"
-        
-        echo matrix=$json >> $GITHUB_OUTPUT
+          ambiente="s1,s2"
+                  
+          # Lendo a variável de ambiente
+          variavel=$ambiente
+          
+          # Separando os valores da variável por vírgula
+          IFS=',' read -ra valores <<< "$variavel"
+          
+          # Inicializando o JSON
+          json="{\"include\": ["
+          
+          # Loop sobre os valores
+          for valor in "${valores[@]}"; do
+              # Adicionando cada valor ao JSON
+              json="$json\n  {\"value\": \"$valor\"},"
+          done
+          
+          # Removendo a última vírgula
+          json=$(echo "$json" | sed '$ s/,$//')
+          
+          # Finalizando o JSON
+          json="$json\n]}"
+          
+          echo matrix=$json >> $GITHUB_OUTPUT
 
         
   job2:
