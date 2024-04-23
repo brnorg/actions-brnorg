@@ -45,7 +45,7 @@ jobs:
           json="$json\n]}"
           
           # echo "matrix=$json" >> $GITHUB_OUTPUT
-          echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+          echo matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]} >> $GITHUB_OUTPUT 
 
         
   job2:
