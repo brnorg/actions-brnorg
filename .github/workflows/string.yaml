@@ -53,5 +53,5 @@ jobs:
     strategy:
       matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
     steps:
-      - run: echo "Matrix - Project ${{ matrix.project }}, Config ${{ matrix.config }}"
+      - run: echo "ola"
             
