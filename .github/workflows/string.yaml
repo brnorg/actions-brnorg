@@ -13,38 +13,47 @@ on:
           - cer
           - "[dr, prod]"
   
+name: build
+on: push
 jobs:
-  change-string:
+  job1:
     runs-on: ubuntu-latest
-
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-     - name: teste
-       run: |
-        ambiente="a1,a2"
+      - id: set-matrix
+        run: |
+        $ambiente="s1,s2"
+                
+        # Lendo a variável de ambiente
+        variavel=$ambiente
         
-        # Transforma a string em um array, separando os valores pela vírgula
-        IFS=',' read -r -a valores <<< "$ambiente"
+        # Separando os valores da variável por vírgula
+        IFS=',' read -ra valores <<< "$variavel"
         
-        # Inicia a construção do JSON
-        json="{"
+        # Inicializando o JSON
+        json="{\"include\": ["
         
-        # Loop pelos valores no array
+        # Loop sobre os valores
         for valor in "${valores[@]}"; do
-            # Adiciona cada par chave-valor ao JSON
-            json="$json\n  \"$valor\": \"$valor\","
+            # Adicionando cada valor ao JSON
+            json="$json\n  {\"value\": \"$valor\"},"
         done
         
-        # Remove a última vírgula e fecha o JSON
-        json="${json%,*}\n}"
+        # Removendo a última vírgula
+        json=$(echo "$json" | sed '$ s/,$//')
         
-        # Imprime o JSON
-        echo "matrix=$json" >> $GITHUB_OUTPUT
+        # Finalizando o JSON
+        json="$json\n]}"
+        
+        echo matrix=$json >> $GITHUB_OUTPUT
 
-
+        
   job2:
-   needs: change-string
-   runs-on: ubuntu-latest
-   strategy:
-      matrix: ${{ fromJSON(needs.change-string.outputs.matrix) }}
-   steps:
-     - run: echo "Matrix - Project ${{ matrix.project }}, Config ${{ matrix.config }}"              
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
+    steps:
+      - run: echo "Matrix - Project ${{ matrix.project }}, Config ${{ matrix.config }}"
+            
