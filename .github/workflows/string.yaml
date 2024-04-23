@@ -11,9 +11,9 @@ on:
         required: false
         type: choice
         options:
-          - dr
-          - prod
-          - cer
+          - "dr"
+          - "prod"
+          - "cer"
           - '"dr","prod"'
         default: dr 
 
