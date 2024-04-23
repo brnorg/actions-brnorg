@@ -38,7 +38,7 @@ jobs:
         json="${json%,*}\n}"
         
         # Imprime o JSON
-        echo matrix=$json >> $GITHUB_OUTPUT
+        echo "matrix=$json" >> $GITHUB_OUTPUT
 
 
   job2:
