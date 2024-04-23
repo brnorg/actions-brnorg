@@ -44,7 +44,7 @@ jobs:
           # Finalizando o JSON
           json="$json\n]}"
           
-          echo "matrix=$json" >> $GITHUB_OUTPUT
+          echo -e matrix=$json >> $GITHUB_OUTPUT
 
         
   job2:
