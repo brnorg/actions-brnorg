@@ -1,6 +1,9 @@
 name: tranformacao de string
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       name:
@@ -16,43 +19,47 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - id: set-matrix
-        run: |
-          ambiente="s1,s2"
+     - run: echo ${{ fromJSON(inputs.name }}
+  # job1:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     matrix: ${{ steps.set-matrix.outputs.matrix }}
+  #   steps:
+  #     - id: set-matrix
+  #       run: |
+  #         ambiente="s1,s2"
                   
-          # Lendo a variável de ambiente
-          variavel=$ambiente
+  #         # Lendo a variável de ambiente
+  #         variavel=$ambiente
           
-          # Separando os valores da variável por vírgula
-          IFS=',' read -ra valores <<< "$variavel"
+  #         # Separando os valores da variável por vírgula
+  #         IFS=',' read -ra valores <<< "$variavel"
           
-          # Inicializando o JSON
-          json="{\"include\": ["
+  #         # Inicializando o JSON
+  #         json="{\"include\": ["
           
-          # Loop sobre os valores
-          for valor in "${valores[@]}"; do
-              # Adicionando cada valor ao JSON
-              json="$json\n  {\"value\": \"$valor\"},"
-          done
+  #         # Loop sobre os valores
+  #         for valor in "${valores[@]}"; do
+  #             # Adicionando cada valor ao JSON
+  #             json="$json\n  {\"value\": \"$valor\"},"
+  #         done
           
-          # Removendo a última vírgula
-          json=$(echo "$json" | sed '$ s/,$//')
+  #         # Removendo a última vírgula
+  #         json=$(echo "$json" | sed '$ s/,$//')
           
-          # Finalizando o JSON
-          json="$json\n]}"
+  #         # Finalizando o JSON
+  #         json="$json\n]}"
           
-          # echo "matrix=$json" >> $GITHUB_OUTPUT
-          echo matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]} >> $GITHUB_OUTPUT 
+  #         # echo "matrix=$json" >> $GITHUB_OUTPUT
+  #         echo matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]} >> $GITHUB_OUTPUT 
 
         
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
-    steps:
-      - run: echo "ola"
+  # job2:
+  #   needs: job1
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
+  #   steps:
+  #     - run: echo "ola"
             
