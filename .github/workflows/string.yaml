@@ -32,7 +32,7 @@ jobs:
     strategy:
       matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
     steps:
-      - run: echo ok
+      - run: echo ${{ matrix.valores }}
 
 
   # job1:
