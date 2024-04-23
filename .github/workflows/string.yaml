@@ -19,6 +19,22 @@ on:
 
 
 jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: echo matrix='{"valores":[${{inputs.name}}]}' >> $GITHUB_OUTPUT
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
+    steps:
+      - run: echo ok
+
+
   # job1:
   #   runs-on: ubuntu-latest
   #   outputs:
@@ -37,12 +53,12 @@ jobs:
   #   steps:
   #     - run: echo "ola"
 
-  job2:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJSON('{"valores":["valor1"]}') }}
-    steps:
-      - run: echo '{"valores":[${{inputs.name}}]}'
+  # job2:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix: ${{ fromJSON('{"valores":["valor1"]}') }}
+  #   steps:
+  #     - run: echo '{"valores":[${{inputs.name}}]}'
 
 
   # job1:
