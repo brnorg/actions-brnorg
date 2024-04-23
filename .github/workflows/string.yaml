@@ -20,7 +20,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-     - run: echo ${{ fromJSON(inputs.name }}
+     - run: echo ${{ fromJSON(inputs.name) }}
   # job1:
   #   runs-on: ubuntu-latest
   #   outputs:
