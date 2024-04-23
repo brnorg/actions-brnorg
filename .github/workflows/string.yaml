@@ -25,7 +25,7 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: echo "matrix={"include":[{"value":"a1"},{"value":"a2"},{"value":"a3"}]}" >> $GITHUB_OUTPUT
+        run: echo "matrix={\"include\":[{\"value\":\"prd\"},{\"value\":\"dr\"}]}" >> $GITHUB_OUTPUT
   job2:
     needs: job1
     runs-on: ubuntu-latest
