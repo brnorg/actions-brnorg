@@ -21,7 +21,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-     - run: echo ${{ fromJSON(inputs.name) }}
+     - run: echo ${{ fromJSON({\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}) }}
   # job1:
   #   runs-on: ubuntu-latest
   #   outputs:
