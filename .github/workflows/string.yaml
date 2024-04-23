@@ -30,19 +30,19 @@ jobs:
   #         smatrix=$(IFS=','; echo -n "{\"include\":[{\"value\":\"$ambiente\"}]}")
   #         echo matrix=$smatrix >> $GITHUB_OUTPUT
   #       # run: echo "matrix={\"include\":[{\"value\":\"prd\"},{\"value\":\"dr\"}]}" >> $GITHUB_OUTPUT
-  # job2:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix: ${{ fromJSON('{"valores":[inputs.name]}') }}
-  #   steps:
-  #     - run: echo "ola"
-
   job2:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJSON('{"valores":["valor1","valor2"]}') }}
+      matrix: ${{ fromJSON('{"valores":[inputs.name]}') }}
     steps:
       - run: echo "ola"
+
+  # job2:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix: ${{ fromJSON('{"valores":["valor1","valor2"]}') }}
+  #   steps:
+  #     - run: echo "ola"
 
 
   # job1:
