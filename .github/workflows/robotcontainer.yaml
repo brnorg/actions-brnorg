@@ -16,4 +16,4 @@ jobs:
         uses: brnorg/robot-framework@v1
         with:
           robot_tests_dir: ./tests
-          robot_requirements: $(pwd)/requirements.txt
+          robot_requirements: ./tests/requirements.txt
