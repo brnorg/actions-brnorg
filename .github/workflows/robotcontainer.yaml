@@ -1,0 +1,19 @@
+name: teste frontend com robot framework
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  robot_test:
+    runs-on: ubuntu-latest
+    name: Run Robot Framework Tests
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Robot Framework
+        uses: brnorg/robot-framework@v1.0.1
+        with:
+          robot_tests_dir: ./tests
+          robot_requirements: requirements.txt
