@@ -1,4 +1,4 @@
-name: teste frontend com robot framework
+name: robot container
 
 on:
   workflow_dispatch:
