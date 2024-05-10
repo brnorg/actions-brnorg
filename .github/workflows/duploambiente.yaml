@@ -19,13 +19,12 @@ jobs:
         shell: bash
 
   delivery:
-    name: Deploy - ${{ matrix.valores }}
+    name: Deploy
     needs: make-environment
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        valores: ${{fromJson(needs.make-environment.outputs.matrix)}}
-    environment: ${{ matrix.valores }}
+        valores: ["${{fromJson(needs.make-environment.outputs.matrix).valores}}"]
     steps:
       - name: ambiente ${{ matrix.valores }}
         run: echo ${{ matrix.valores }}
