@@ -1,0 +1,37 @@
+name: acesso
+
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: choice
+        options:
+          - '"dr"'
+          - '"prd"'
+          - '"cer"'
+          - '"dr","prd"'
+          
+      
+
+
+jobs:
+  make-environment:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: matrix='{"valores":[${{inputs.environment}}]}' >> $GITHUB_OUTPUT
+
+  delivery:
+    name: Deploy - ${{ matrix.valores }}
+    needs: make-environment
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{ fromJSON(needs.make-environment.outputs.matrix) }}
+      fail-fast: false
+    environment: ${{ matrix.valores }}
+    steps:
+      - name: echo ${{ matrix.valores }}
+    
