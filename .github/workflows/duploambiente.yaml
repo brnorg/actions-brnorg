@@ -17,9 +17,9 @@ jobs:
       - id: set-matrix
         run: |
           if [[ "${{inputs.environment}}" == "dr,prd" ]]; then
-            echo "::set-output name=matrix::{\"valores\":[\"dr\",\"prd\"]}"
+            echo "name=matrix::{\"valores\":[\"dr\",\"prd\"]}" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=matrix::{\"valores\":[\"${{inputs.environment}}\"]}"
+            echo "name=matrix::{\"valores\":[\"${{inputs.environment}}\"]}" >> $GITHUB_OUTPUT
           fi
         shell: bash
 
