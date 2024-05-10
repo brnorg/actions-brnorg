@@ -1,4 +1,4 @@
-name: acesso
+name: ambientes
 
 on: 
   workflow_dispatch:
