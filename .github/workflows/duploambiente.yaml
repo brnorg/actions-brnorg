@@ -8,13 +8,10 @@ on:
         type: choice
         options:
           - '"dr"'
-          - '"prd"'
-          - '"cer"'
+          - "'prd'"
+          - "'cer'"
           - '"dr","prd"'
-          
-      
-
-
+              
 jobs:
   make-environment:
     runs-on: ubuntu-latest
