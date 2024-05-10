@@ -6,12 +6,8 @@ on:
       environment:
         required: true
         type: choice
-        options:
-          - '"dr"'
-          - "'prd'"
-          - "'cer'"
-          - '"dr","prd"'
-              
+        options: ["dr", "prd", "cer", "dr,prd"]
+
 jobs:
   make-environment:
     runs-on: ubuntu-latest
@@ -19,17 +15,17 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: matrix='{"valores":[${{inputs.environment}}]}' >> $GITHUB_OUTPUT
+        run: echo "::set-output name=matrix::{\"valores\":[\"${{inputs.environment}}\"]}"
 
   delivery:
     name: Deploy - ${{ matrix.valores }}
     needs: make-environment
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJSON(needs.make-environment.outputs.matrix) }}
+      matrix:
+        valores: ${{fromJson(needs.make-environment.outputs.matrix)}}
       fail-fast: false
     environment: ${{ matrix.valores }}
     steps:
       - name: ambiente ${{ matrix.valores }}
         run: echo ${{ matrix.valores }}
-    
