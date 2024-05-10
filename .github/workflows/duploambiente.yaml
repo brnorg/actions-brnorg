@@ -15,7 +15,12 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
-        run: echo "::set-output name=matrix::{\"valores\":[\"${{inputs.environment}}\"]}"
+        run: |
+          if [[ "${{inputs.environment}}" == "dr,prd" ]]; then
+            echo "::set-output name=matrix::{\"valores\":[\"dr\",\"prd\"]}"
+          else
+            echo "::set-output name=matrix::{\"valores\":[\"${{inputs.environment}}\"]}"
+          fi
         shell: bash
 
   delivery:
@@ -24,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        valores: ["${{fromJson(needs.make-environment.outputs.matrix).valores}}"]
+        valores: ${{fromJson(needs.make-environment.outputs.matrix).valores}}
     environment: ${{ matrix.valores }}
     steps:
       - name: ambiente ${{ matrix.valores }}
