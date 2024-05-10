@@ -12,9 +12,10 @@ jobs:
       image: ppodgorsek/robot-framework
 
     steps:
-      # - name: Checkout Repository
-      #   uses: actions/checkout@v4
-
+    
       - name: List Python Packages
         run: |
           pip list
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
