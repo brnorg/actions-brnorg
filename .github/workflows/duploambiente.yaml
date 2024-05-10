@@ -16,6 +16,7 @@ jobs:
     steps:
       - id: set-matrix
         run: echo "::set-output name=matrix::{\"valores\":[\"${{inputs.environment}}\"]}"
+        shell: bash
 
   delivery:
     name: Deploy - ${{ matrix.valores }}
@@ -24,7 +25,6 @@ jobs:
     strategy:
       matrix:
         valores: ${{fromJson(needs.make-environment.outputs.matrix)}}
-      fail-fast: false
     environment: ${{ matrix.valores }}
     steps:
       - name: ambiente ${{ matrix.valores }}
