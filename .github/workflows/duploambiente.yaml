@@ -33,5 +33,6 @@ jobs:
       fail-fast: false
     environment: ${{ matrix.valores }}
     steps:
-      - name: echo ${{ matrix.valores }}
+      - name: ambiente ${{ matrix.valores }}
+        run: echo ${{ matrix.valores }}
     
