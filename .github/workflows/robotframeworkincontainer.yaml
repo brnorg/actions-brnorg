@@ -8,11 +8,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    container:
+      image: ppodgorsek/robot-framework
 
     steps:
-
+    
+      - name: List Python Packages
+        run: |
+          pip list
 
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          token: aaaaaa
+          token: ${{ secrets.BRN }}
