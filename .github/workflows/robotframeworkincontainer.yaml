@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: ppodgorsek/robot-framework
+      image: brunosoouza/robot
 
     steps:
     
