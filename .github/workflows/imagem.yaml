@@ -28,13 +28,13 @@ jobs:
     steps:
 
       - name: Run Sonar analysis
-        if: ${{ inputs.sonar == true }}
+        if: ${{ inputs.sonar == 'true' }}
         run: |
           # Comandos para executar análise no Sonar
           echo "Running Sonar analysis..."
       
       - name: Run Fortify scan
-        if: ${{ inputs.fortify == true }}
+        if: ${{ inputs.fortify == 'true' }}
         run: |
           # Comandos para executar scan no Fortify
           echo "Running Fortify scan..."
