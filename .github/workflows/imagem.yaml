@@ -7,17 +7,17 @@ on:
       sonar:
         required: false
         description: 'Whether to use Sonar'
-        default: false
-        type: boolean
+        default: 'false'
+        type: string
       fortify:
         required: false
         description: 'Whether to use Fortify'
-        default: false
-        type: boolean
+        default: 'false'
+        type: string
       usegates:
         required: false
         description: 'defina o gate de qualidade'
-        default: true
+        default: 'true'
         type: string
 jobs:
   build:
