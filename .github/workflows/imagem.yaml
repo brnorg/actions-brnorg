@@ -17,7 +17,7 @@ on:
       usegates:
         required: false
         description: 'defina o gate de qualidade'
-        default: 'true'
+        default: true
         type: string
 jobs:
   build:
