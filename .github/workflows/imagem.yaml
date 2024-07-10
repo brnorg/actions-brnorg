@@ -7,26 +7,24 @@ on:
       sonar:
         required: false
         description: 'Whether to use Sonar'
-        default: 'false'
+        default: false
         type: boolean
       fortify:
         required: false
         description: 'Whether to use Fortify'
-        default: 'false'
+        default: false
         type: boolean
 
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ${{ inputs.sonar == 'true' || inputs.fortify == 'true' ? 'alpine' : 'debian' }}
+      image: ${{ inputs.useGates == 'true' && 'alpine'}}${{ inputs.useGates == 'false' && 'alpine'}}
     
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
 
       - name: Run Sonar analysis
-        if: ${{ inputs.sonar == 'true' }}
+        if: ${{ inputs.sonar == 'true'}}
         run: |
           # Comandos para executar análise no Sonar
           echo "Running Sonar analysis..."
