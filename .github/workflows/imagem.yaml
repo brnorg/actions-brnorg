@@ -23,8 +23,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: ${{ inputs.usegates == 'false' && 'alpine' || 'debian' }}
+    # container:
+    #   image: ${{ inputs.usegates == 'false' && 'alpine' || 'debian' }}
 
     steps:
 
