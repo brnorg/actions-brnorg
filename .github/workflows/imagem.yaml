@@ -14,12 +14,16 @@ on:
         description: 'Whether to use Fortify'
         default: false
         type: boolean
-
+      usegates:
+        required: false
+        description: 'defina o gate de qualidade'
+        default: false
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ${{ inputs.useGates == 'true' && 'alpine'}}${{ inputs.useGates == 'false' && 'alpine'}}
+      image: ${{ inputs.usegates == 'true' && 'alpine' || 'debian'}}
     
     steps:
 
