@@ -16,27 +16,28 @@ on:
         type: string
       usegates:
         required: false
-        description: 'defina o gate de qualidade'
-        default: true
+        description: 'Define quality gate usage'
+        default: 'true'
         type: string
+
 jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: ${{ inputs.usegates == 'true' && 'alpine' || 'debian'}}
-    
+      image: ${{ inputs.usegates == 'true' && 'alpine' || 'debian' }}
+
     steps:
 
       - name: Run Sonar analysis
         if: ${{ inputs.sonar == 'true' }}
         run: |
-          # Comandos para executar análise no Sonar
+          # Commands to run Sonar analysis
           echo "Running Sonar analysis..."
-      
+
       - name: Run Fortify scan
         if: ${{ inputs.fortify == 'true' }}
         run: |
-          # Comandos para executar scan no Fortify
+          # Commands to run Fortify scan
           echo "Running Fortify scan..."
-      
-      # Adicione mais passos conforme necessário para o seu job
+
+      # Add more steps as needed for your job
