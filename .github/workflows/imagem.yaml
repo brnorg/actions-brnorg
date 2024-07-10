@@ -1,0 +1,40 @@
+name: Check Inputs Workflow
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      sonar:
+        required: false
+        description: 'Whether to use Sonar'
+        default: 'false'
+        type: boolean
+      fortify:
+        required: false
+        description: 'Whether to use Fortify'
+        default: 'false'
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.sonar == 'true' || inputs.fortify == 'true' ? 'alpine' : 'debian' }}
+    
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Run Sonar analysis
+        if: ${{ inputs.sonar == 'true' }}
+        run: |
+          # Comandos para executar análise no Sonar
+          echo "Running Sonar analysis..."
+      
+      - name: Run Fortify scan
+        if: ${{ inputs.fortify == 'true' }}
+        run: |
+          # Comandos para executar scan no Fortify
+          echo "Running Fortify scan..."
+      
+      # Adicione mais passos conforme necessário para o seu job
