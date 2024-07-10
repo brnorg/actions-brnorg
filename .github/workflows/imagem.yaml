@@ -27,7 +27,10 @@ jobs:
     #   image: ${{ inputs.usegates == 'false' && 'alpine' || 'debian' }}
 
     steps:
-
+      - name: show
+        run: |
+          echo ${{ inputs.sonar }}
+          echo ${{ inputs.fortify }}
       - name: Run Sonar analysis
         if: ${{ inputs.sonar == 'true' }}
         run: |
