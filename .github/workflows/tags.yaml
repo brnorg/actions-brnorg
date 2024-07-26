@@ -1,0 +1,26 @@
+name: Remove Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to remove'
+        required: true
+        type: string
+
+jobs:
+  remove-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Remove Tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG=${{ github.event.inputs.tag }}
+          echo "Removing tag: $TAG"
+          git tag -d "$TAG"
+          git push origin --delete "$TAG"
