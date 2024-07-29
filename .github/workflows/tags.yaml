@@ -23,4 +23,4 @@ jobs:
           git tag -d "${{ github.event.inputs.tag }}"
           git push origin --delete "${{ github.event.inputs.tag }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GLOBAL }}
