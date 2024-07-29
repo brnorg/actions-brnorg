@@ -20,7 +20,9 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+          git fetch --tags
+          git tag
           git tag -d "${{ github.event.inputs.tag }}"
           git push origin --delete "${{ github.event.inputs.tag }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GLOBAL }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.TOKEN_GLOBAL }}
