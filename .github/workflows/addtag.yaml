@@ -1,0 +1,28 @@
+name: Tag Commit
+
+on:
+  push:
+    branches:
+      - main  # ou a branch que você deseja monitorar
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get current date and time
+        id: datetime
+        run: echo "DATE=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+
+      - name: Create tag
+        id: create_tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git tag -a "tag-${{ env.DATE }}" -m "Automated tag created at ${{ env.DATE }}"
+          git push origin "tag-${{ env.DATE }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
