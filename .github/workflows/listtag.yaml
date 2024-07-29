@@ -1,0 +1,19 @@
+name: List Tags
+
+on:
+  workflow_dispatch:
+
+jobs:
+  list:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List tags
+        run: |
+          git fetch --tags
+          git tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
