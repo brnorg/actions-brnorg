@@ -6,21 +6,21 @@ on:
       tag:
         description: 'Tag to remove'
         required: true
-        type: string
+        default: 'tag-YYYYMMDDHHMMSS'  # Substitua com a tag padrão ou deixe em branco
 
 jobs:
-  remove-tag:
+  remove:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Remove Tag
+      - name: Remove tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git tag -d "${{ github.event.inputs.tag }}"
+          git push origin --delete "${{ github.event.inputs.tag }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG=${{ github.event.inputs.tag }}
-          echo "Removing tag: $TAG"
-          git tag -d "$TAG"
-          git push origin --delete "$TAG"
