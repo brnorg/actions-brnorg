@@ -1,9 +1,7 @@
 name: Tag Commit
 
 on:
-  push:
-    branches:
-      - main  # ou a branch que você deseja monitorar
+  workflow_dispatch: 
 
 jobs:
   tag:
