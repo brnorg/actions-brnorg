@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Variáveis
+ACR_NAME="seu_acr"  # Nome do seu Azure Container Registry
+IMAGE_NAME="seu_repositorio/ubi"  # Nome do repositório e da imagem
+TAG="8.10-1020"  # Tag da imagem
+
+# Verifica se a imagem existe
+if az acr repository show-tags --name $ACR_NAME --repository $IMAGE_NAME --query "[?contains(@, '$TAG')]" -o tsv | grep -q "$TAG"; then
+    echo "A imagem $IMAGE_NAME:$TAG já existe no Azure Container Registry."
+else
+    echo "A imagem $IMAGE_NAME:$TAG não existe. Enviando a imagem..."
+    # Aqui você pode adicionar o comando para enviar a imagem, se necessário
+    # docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$TAG
+fi
