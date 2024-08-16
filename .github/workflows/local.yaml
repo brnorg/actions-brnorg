@@ -9,4 +9,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4.1.7
-  
+        
+      - name: Run a simple container action
+        uses: docker://alpine:3.12
+        with:
+          entrypoint: /bin/echo
+          args: 'Hello from a simple container action!'
