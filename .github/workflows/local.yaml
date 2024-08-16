@@ -1,0 +1,12 @@
+name: 'runner container'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  teste:
+    runs-on: [self-hosted, brn]
+    steps:
+      - name: checkout
+        uses: actions/checkout@4.1.7
+  
