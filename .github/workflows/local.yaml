@@ -21,3 +21,11 @@ jobs:
         with:
           entrypoint: /bin/echo
           args: 'Hello from a simple container action!'
+
+
+  teste2:   
+    runs-on: aks 
+    container:
+      image: alpine
+    steps:
+      - run: echo ok
