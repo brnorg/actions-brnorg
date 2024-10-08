@@ -5,7 +5,7 @@ on:
 
 jobs:
   teste:
-    runs-on: [self-hosted, brn]
+    runs-on: [self-hosted, aks]
     steps:
       - name: checkout
         uses: actions/checkout@v4.1.7
