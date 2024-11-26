@@ -1,0 +1,14 @@
+name: teste commit
+
+on: [workflow_dispatch]
+
+jobs:
+  teste-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "1" >> increment.txt
+      - run: |
+          git add .
+          git commit -m "teste commit"
+          git push origin
