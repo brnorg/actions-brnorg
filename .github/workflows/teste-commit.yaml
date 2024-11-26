@@ -6,9 +6,12 @@ jobs:
   teste-commit:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "GITHUB_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
       - uses: actions/checkout@v4
       - run: echo "1" >> increment.txt
+      
+      - name: teste commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - run: |
       
           git config --global user.email "teste@example.com"
