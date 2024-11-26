@@ -10,6 +10,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: echo "1" >> increment.txt
       - run: |
+      
+          git config --global user.email "teste@example.com"
+          git config --global user.name "testador"
           git add .
           git commit -m "teste commit"
           git push origin
