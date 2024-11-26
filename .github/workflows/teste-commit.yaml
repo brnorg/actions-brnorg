@@ -12,7 +12,7 @@ jobs:
       - name: teste commit
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - run: |
+        run: |
       
           git config --global user.email "teste@example.com"
           git config --global user.name "testador"
